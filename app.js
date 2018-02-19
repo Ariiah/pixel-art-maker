@@ -9,22 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.appendChild(pixel); // actually attaches the pixel div to the canvas, then loops
   } // through the continually add pixels
 
-  ////// changes color of pixel to color listed //////
 
   let menuColors = document.getElementById("menu")
-  //
-  // function colorSwitch(event) {
-  //   if (event.target.className.match(/blue/)) {
-  //     event.target.classList.remove('blue')
-  //     event.target.classList.add('white')
-  //     console.log('erase')
-  //   } else {
-  //     event.target.classList.remove('white')
-  //     event.target.classList.add('blue')
-  //     console.log('blue')
-  //   }
-  // }
-  // canvas.addEventListener('click', colorSwitch)
 
   ///// GET CURRENT COLOR /////
   let currentColor; // declare unassigned global variable to use later
@@ -34,40 +20,32 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 
 
-
   ////// DRAGGING ///////
 
-
   let dragging = false
+
   ////// MOUSEDOWN //////
   const start = (event) => { // same as "let start = function(event)" or function start(event)
-    dragging = true //
-    event.target.classList.add(currentColor)
+    dragging = true // changes dragging to work
+    event.target.className = `pixels ${currentColor}` // targets color selected
   }
   canvas.addEventListener("mousedown", start)
 
   //////MOUSEOVER /////
 
-const drag = (event) => {
-  if (dragging === true){
-    event.target.classList.add(currentColor)
+  const drag = (event) => {
+    if (dragging === true){ // checks if it's still true so draggin continues
+      event.target.className = `pixels ${currentColor}` // same as 'pixels ' + (currentColor)
+    }
   }
-}
-canvas.addEventListener("mouseover", drag)
+  canvas.addEventListener("mouseover", drag)
 
-////// MOUSEUP //////
+  ////// MOUSEUP //////
 
-const end = (event) => {
-  dragging = false
-}
-canvas.addEventListener("mouseup", end)
-
-
-
-
-
-
-
+  const end = (event) => {
+    dragging = false // ends the dragging
+  }
+  canvas.addEventListener("mouseup", end)
 
 
 
