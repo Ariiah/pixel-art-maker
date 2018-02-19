@@ -1,65 +1,77 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-////// loops through pixel to make grid of desired size //////
+  ////// loops through pixel to make grid of desired size //////
 
   var canvas = document.getElementById('canvas'); // shorthand to call the canvas id in DOM
   for (let i = 0; i < 1681; i++) { // loops through the new div
     let pixel = document.createElement('div'); // creates new div for pixels
     pixel.classList.add('pixels'); // adds pixel class the the list of classes
     canvas.appendChild(pixel); // actually attaches the pixel div to the canvas, then loops
-  }                            // through the continually add pixels
+  } // through the continually add pixels
 
-////// changes color of pixel to color listed //////
+  ////// changes color of pixel to color listed //////
 
   let menuColors = document.getElementById("menu")
-  function colorSwitch(event) {
-    if (event.target.className.match(/blue/)){
-      event.target.classList.remove('blue')
-      event.target.classList.add('white')
-      console.log('erase')
-    } else {
-      event.target.classList.remove('white')
-      event.target.classList.add('blue')
-      console.log('blue')
-    }
-  }
-  canvas.addEventListener('click', colorSwitch)
-
-  ///// test function /////
-let currentColor;
-menuColors.addEventListener('click', function(event){
-  currentColor = event.target.classList[0]
-  console.log(currentColor)
-})
-
-//////  //////
-  // let menuColors = document.getElementsByClassName('colors')
-  // function colorChoose(event) {
-  //   if (event.target.className.match(/colors/)){
-  //     event.target.idName.
-  //     console.log('color change?')
+  //
+  // function colorSwitch(event) {
+  //   if (event.target.className.match(/blue/)) {
+  //     event.target.classList.remove('blue')
+  //     event.target.classList.add('white')
+  //     console.log('erase')
+  //   } else {
+  //     event.target.classList.remove('white')
+  //     event.target.classList.add('blue')
+  //     console.log('blue')
   //   }
-  //   return event.target
   // }
-  // menuColors.addEventListener('click', colorChoose)
+  // canvas.addEventListener('click', colorSwitch)
 
-
-  // when color is clicked, read event.target
-  // set current color to class to the reader can find it
-  // call from event to grid so it shows up
-
-
-
-
-
+  ///// GET CURRENT COLOR /////
+  let currentColor; // declare unassigned global variable to use later
+  menuColors.addEventListener('click', function(event) {
+    currentColor = event.target.classList[0]
+    event.target.classList.add(currentColor)
+  })
 
 
 
+  ////// DRAGGING ///////
+
+
+  let dragging = false
+  ////// MOUSEDOWN //////
+  const start = (event) => { // same as "let start = function(event)" or function start(event)
+    dragging = true //
+    event.target.classList.add(currentColor)
+  }
+  canvas.addEventListener("mousedown", start)
+
+  //////MOUSEOVER /////
+
+const drag = (event) => {
+  if (dragging === true){
+    event.target.classList.add(currentColor)
+  }
+}
+canvas.addEventListener("mouseover", drag)
+
+////// MOUSEUP //////
+
+const end = (event) => {
+  dragging = false
+}
+canvas.addEventListener("mouseup", end)
 
 
 
 
-////// for looping through colors //////
+
+
+
+
+
+
+  ////// for looping through colors //////
 
   // var menu = document.getElementById('menu')
   // for (var i = 0; i < 2; i++) {
@@ -69,7 +81,7 @@ menuColors.addEventListener('click', function(event){
   //
   // }
 
-////// creating new div element for palette //////
+  ////// creating new div element for palette //////
 
   // let menu = document.getElementById('menu')
   // let colorPicker = document.createElement('div')
@@ -79,16 +91,6 @@ menuColors.addEventListener('click', function(event){
   //   }
   // }
 
-//// toggle flashlight example //////
-
-
-//
-// document.getElementById('blue').addEventListener('click')
-//
-// document.addEventListener('click', function() {
-//
-//
-// })
 
 
 });
